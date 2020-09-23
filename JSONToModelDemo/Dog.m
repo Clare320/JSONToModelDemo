@@ -8,13 +8,31 @@
 
 #import "Dog.h"
 
-@interface Dog ()
+/**
+ @dynamic property; 
+ @synthesize property;
+ */
+
+@interface Dog () {
+    NSInteger _sex;
+    NSString *_city;
+}
 
 @property (nonatomic, strong) NSString *address;
 
 @end
 
 @implementation Dog
+@dynamic sex;
+
+
+- (void)setSex:(NSInteger)sex {
+    _sex = sex;
+}
+
+- (NSInteger)sex {
+    return  _sex;
+}
 
 - (void)run {
     NSLog(@"to %@ run run run!", self.address);

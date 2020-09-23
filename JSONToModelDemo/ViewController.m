@@ -14,11 +14,23 @@
 
 #import "AFRespModel.h"
 #import "Dog.h"
+#import "BlockChainMaker.h"
+
+
+typedef void(^testCheckBlock)(void);
+NSInteger totalScore = 1001;
+
+static NSInteger totalMount = 1;
 
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *reqButton;
+@property (nonatomic, strong) UITextField *nameField;
+@property (nonatomic, strong) UIPickerView *namePicker;
+
 @property (nonatomic, strong) NSURLSessionDataTask *dataTask;
+
+@property (nonatomic, strong) Dog *redDog;
 @end
 
 @implementation ViewController
@@ -27,15 +39,104 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"view did load");
+    
     [self.view addSubview:self.reqButton];
-//    [self test];
+    [self.view addSubview:self.nameField];
     
     MTRule *rule = [[MTRule alloc] initWithTarget:self selector:@selector(requestAF) durationThreshold:1];
     [rule apply];
+    
+    [self testBlock];
+//    [self testShaddowAndDeepClone];
+//    [self testMasonry];
+//    [self testYYModel];
+//    [self testKVCAndKVO];
+
 }
 
-- (void)test {
-    NSString *target = @"{\"address\":\"PuDong\"}";
+//MARK: - life cycle
+
+// 苹果推荐添加、更新约束的地方，
+- (void)updateViewConstraints {
+    NSLog(@"update View Constraints!");
+    
+    [self.nameField makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).with.offset(130);
+        make.left.equalTo(self.view).with.offset(10);
+        make.right.equalTo(self.view).with.offset(-10);
+        make.height.equalTo(@35);
+    }];
+    
+    [super updateViewConstraints];
+}
+
+- (void)dealloc {
+    NSLog(@"redDog: %@", self.redDog);
+    [self.redDog removeObserver:self forKeyPath:@"name"];
+}
+
+
+//MARK: - 处理
+
+- (void)testBlock {
+    NSString *nick = @"cc";
+    void (^block1)(NSInteger age) = ^ (NSInteger age) {
+        NSLog(@"Hello world %ld", age);
+    };
+    
+    __block NSInteger val = 10;
+    NSLog(@"val-->%p", &val);
+    NSMutableString *name = [NSMutableString stringWithString:@"kunm"];
+    void (^block)(void) = ^ {
+        val = 13;
+        NSLog(@"block val-->%p", &val);
+        totalScore = 1003;
+        totalMount = 3;
+        [name appendString:@" mnu"];
+        NSLog(@"block value: %ld, global value: %ld, totalMount: %ld, name: %@", val, totalScore, totalMount, name);
+    };
+    val = 15;
+    totalScore = 1000;
+    block();
+    
+    BlockChainMaker *maker = [[BlockChainMaker alloc] init];
+    maker.add(20).add(30);
+    
+    NSLog(@"result: %.2f", maker.result);
+    
+//    _NSConcreteStackBlock
+//    _NSConcreteGlobalBlock
+}
+
+- (void)testShaddowAndDeepClone {
+    NSString *first = @"1";
+    NSMutableString *second = [NSMutableString stringWithString:@"2"];
+    
+    NSArray *array = @[first, second];
+    NSArray *copyArray = [array copy];
+    NSMutableArray *mutableArray = [array mutableCopy];
+
+    NSLog(@"array: %p, copyArray: %p, mutableArray: %p", &array, &copyArray, &mutableArray);
+}
+
+- (void)testMasonry {
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+    
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIView *superView = self.view;
+        
+        make.top.equalTo(superView.mas_safeAreaLayoutGuideTop).with.offset(200);
+        make.left.equalTo(superView.mas_safeAreaLayoutGuideLeft).with.offset(10);
+        make.right.equalTo(superView.mas_safeAreaLayoutGuideRight).with.offset(-10);
+        make.height.mas_equalTo(@(CGSizeMake(100, 100)));
+    }];
+}
+
+- (void)testYYModel {
+    NSString *target = @"{\"address\":\"PuDong\", \"sex\":\"0\"}";
     Dog *jsonDog = [Dog yy_modelWithJSON:target];
     NSLog(@"json--->%@", jsonDog);
     
@@ -45,8 +146,31 @@
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[target dataUsingEncoding:NSUTF8StringEncoding ] options:NSJSONReadingMutableLeaves error:NULL];
     Dog *dog = [Dog yy_modelWithJSON:target];
     NSLog(@"dog:%@, dict:%@", dog, dict);
+    // 匿名类别中属性可以被解析赋值，不能被调用
 }
 
+- (void)testKVCAndKVO {
+    Dog *dog = [[Dog alloc] init];
+    self.redDog = dog;
+    
+    [dog setValue:@"Aluka" forKey:@"name"];
+    [dog setValue:@(3) forKey:@"age"];
+    [dog setValue:@(0) forKey:@"sex"];
+    [dog setValue:@"Xcv_kjhg" forKey:@"address"];
+    NSLog(@"before kvc price: %f", dog.price);
+    [dog setValue:@(100.0) forKey:@"price"];
+    [dog setValue:@"CSC" forKey:@"city"];
+    NSLog(@"kvc-name: %@, age: %ld, sex: %@, address: %@, price: %f, city: %@", dog.name, dog.age, dog.sex == 0 ? @"male" : @"female", [dog valueForKey:@"address"], dog.price, [dog valueForKey:@"city"]);
+    
+    [dog addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
+}
+
+
+//MARK: - Binding UI
+
+- (IBAction)changeDogName:(id)sender {
+    self.redDog.name = [self.redDog.name isEqualToString:@"Aluka"] ? @"Sbada" : @"Aluka";
+}
 
 //MARK: - Event
 
@@ -76,6 +200,16 @@
     return  dataTask;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([object isKindOfClass:[Dog class]]) {
+        if ([keyPath isEqualToString:@"name"]) {
+            NSString *oldName = change[NSKeyValueChangeOldKey];
+            NSString *newName = change[NSKeyValueChangeNewKey];
+            NSLog(@"observe new name: %@, old name: %@", newName, oldName);
+        }
+    }
+}
+
 
 //MARK: - Setter && Getter
 
@@ -92,6 +226,24 @@
     return [self dataTaskWithURL:@"http://httpbin.org/get" responseModel:[AFRespModel class] completionHandler:^(NSURLResponse *response, id  _Nullable responseObject, NSError * _Nullable error) {
         NSLog(@"responseObject:%@", responseObject);
     }];
+}
+
+- (UITextField *)nameField {
+    if (!_nameField) {
+        UITextField *field = [[UITextField alloc] init];
+        field.placeholder = @"test masonry";
+        _nameField = field;
+    }
+    return _nameField;
+}
+
+- (UIPickerView *)namePicker {
+    if (!_namePicker) {
+        UIPickerView *picker = [[UIPickerView alloc] init];
+        _namePicker = picker;
+    }
+    
+    return _namePicker;
 }
 
 @end

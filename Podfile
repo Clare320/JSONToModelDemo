@@ -9,4 +9,5 @@ target 'JSONToModelDemo' do
   pod 'YYModel'
   pod 'AFNetworking', '~> 4.0'
   pod 'MessageThrottle'
+  pod 'Masonry'
 end

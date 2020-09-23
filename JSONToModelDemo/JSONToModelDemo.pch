@@ -1,0 +1,24 @@
+//
+//  JSONToModelDemo.pch
+//  JSONToModelDemo
+//
+//  Created by lj on 2020/9/23.
+//  Copyright © 2020 Clare. All rights reserved.
+//
+
+#ifndef JSONToModelDemo_pch
+#define JSONToModelDemo_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "GlobalMacro.h"
+
+//
+#define MAS_SHORTHAND
+
+#define MAS_SHORTHAND_GLOBALS
+
+#import "Masonry.h"
+
+#endif /* JSONToModelDemo_pch */

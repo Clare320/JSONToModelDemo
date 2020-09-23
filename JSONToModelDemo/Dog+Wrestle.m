@@ -10,4 +10,8 @@
 
 @implementation Dog (Wrestle)
 
+- (void)warry {
+    NSLog(@"crazy warry!");
+}
+
 @end

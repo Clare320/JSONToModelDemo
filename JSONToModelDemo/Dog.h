@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Dog : NSObject
+@interface Dog : NSObject {
+    NSString *_nickname;
+}
+
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic) NSInteger age;
+@property (nonatomic) NSInteger sex;
+
+@property (nonatomic, readonly) float price;
 
 @end
 

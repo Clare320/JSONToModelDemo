@@ -14,25 +14,29 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Masonry (1.1.0)
   - MessageThrottle (1.4.0)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0)
+  - Masonry
   - MessageThrottle
   - YYModel
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Masonry
     - MessageThrottle
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MessageThrottle: e1b7c60f93c0b94f3ec5e417807aedd032b4cf24
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 4946593b86492569ff9b216dcdc684c1ea172c49
+PODFILE CHECKSUM: d82d98cde84d048f5eadb899588200ba84e34aa3
 
 COCOAPODS: 1.9.3
