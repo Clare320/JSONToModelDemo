@@ -18,6 +18,9 @@
 		84A5C51825130B7000FD9F16 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C51725130B7000FD9F16 /* Dog.m */; };
 		84A5C51E25130C9B00FD9F16 /* Dog+Wrestle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C51D25130C9B00FD9F16 /* Dog+Wrestle.m */; };
 		84B47439251B223D00FE803D /* BlockChainMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B47438251B223D00FE803D /* BlockChainMaker.m */; };
+		84CF7B9A251C311700F11A6F /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF7B99251C311700F11A6F /* Car.m */; };
+		84CF7B9E251C37F600F11A6F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF7B9D251C37F600F11A6F /* Person.m */; };
+		84CF7BA2251C871900F11A6F /* MyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF7BA1251C871900F11A6F /* MyClass.m */; };
 		84D4DAE125186CBB00636AF2 /* AFRespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D4DAE025186CBB00636AF2 /* AFRespModel.m */; };
 		84D9374C251350500041BA7B /* YYModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D9374B251350500041BA7B /* YYModel.framework */; };
 		C05D1E6BB55C4801E5F7EB9E /* Pods_JSONToModelDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F6E6E46502A6F86F0E17A8 /* Pods_JSONToModelDemo.framework */; };
@@ -46,6 +49,12 @@
 		84B47437251B223D00FE803D /* BlockChainMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockChainMaker.h; sourceTree = "<group>"; };
 		84B47438251B223D00FE803D /* BlockChainMaker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockChainMaker.m; sourceTree = "<group>"; };
 		84B4743B251B312B00FE803D /* GlobalMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMacro.h; sourceTree = "<group>"; };
+		84CF7B98251C311700F11A6F /* Car.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Car.h; sourceTree = "<group>"; };
+		84CF7B99251C311700F11A6F /* Car.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Car.m; sourceTree = "<group>"; };
+		84CF7B9C251C37F600F11A6F /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		84CF7B9D251C37F600F11A6F /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		84CF7BA0251C871900F11A6F /* MyClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyClass.h; sourceTree = "<group>"; };
+		84CF7BA1251C871900F11A6F /* MyClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyClass.m; sourceTree = "<group>"; };
 		84D4DADF25186CBB00636AF2 /* AFRespModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFRespModel.h; sourceTree = "<group>"; };
 		84D4DAE025186CBB00636AF2 /* AFRespModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFRespModel.m; sourceTree = "<group>"; };
 		84D9374B251350500041BA7B /* YYModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YYModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,8 +111,14 @@
 				84A5C50125130B4200FD9F16 /* SceneDelegate.m */,
 				84A5C50325130B4200FD9F16 /* ViewController.h */,
 				84A5C50425130B4200FD9F16 /* ViewController.m */,
+				84CF7BA0251C871900F11A6F /* MyClass.h */,
+				84CF7BA1251C871900F11A6F /* MyClass.m */,
 				84A5C51625130B7000FD9F16 /* Dog.h */,
 				84A5C51725130B7000FD9F16 /* Dog.m */,
+				84CF7B98251C311700F11A6F /* Car.h */,
+				84CF7B99251C311700F11A6F /* Car.m */,
+				84CF7B9C251C37F600F11A6F /* Person.h */,
+				84CF7B9D251C37F600F11A6F /* Person.m */,
 				84A5C51C25130C9B00FD9F16 /* Dog+Wrestle.h */,
 				84A5C51D25130C9B00FD9F16 /* Dog+Wrestle.m */,
 				84D4DADF25186CBB00636AF2 /* AFRespModel.h */,
@@ -246,11 +261,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84CF7B9A251C311700F11A6F /* Car.m in Sources */,
 				84A5C50525130B4200FD9F16 /* ViewController.m in Sources */,
+				84CF7B9E251C37F600F11A6F /* Person.m in Sources */,
 				84A5C4FF25130B4200FD9F16 /* AppDelegate.m in Sources */,
 				84B47439251B223D00FE803D /* BlockChainMaker.m in Sources */,
 				84A5C51825130B7000FD9F16 /* Dog.m in Sources */,
 				84D4DAE125186CBB00636AF2 /* AFRespModel.m in Sources */,
+				84CF7BA2251C871900F11A6F /* MyClass.m in Sources */,
 				84A5C51E25130C9B00FD9F16 /* Dog+Wrestle.m in Sources */,
 				84A5C51025130B4300FD9F16 /* main.m in Sources */,
 				84A5C50225130B4200FD9F16 /* SceneDelegate.m in Sources */,

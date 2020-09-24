@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <objc/runtime.h>
 
 #import <AFNetworking/AFNetworking.h>
 #import <YYModel/YYModel.h>
@@ -15,7 +16,9 @@
 #import "AFRespModel.h"
 #import "Dog.h"
 #import "BlockChainMaker.h"
-
+#import "Car.h"
+#import "MyClass.h"
+//#import "MySubClass.h"
 
 typedef void(^testCheckBlock)(void);
 NSInteger totalScore = 1001;
@@ -47,7 +50,9 @@ static NSInteger totalMount = 1;
     MTRule *rule = [[MTRule alloc] initWithTarget:self selector:@selector(requestAF) durationThreshold:1];
     [rule apply];
     
-    [self testBlock];
+    [self testRuntime];
+//    [self testMethodForward];
+//    [self testBlock];
 //    [self testShaddowAndDeepClone];
 //    [self testMasonry];
 //    [self testYYModel];
@@ -78,6 +83,90 @@ static NSInteger totalMount = 1;
 
 
 //MARK: - 处理
+
+- (void)testRuntime {
+    /*
+    NSLog(@"NSObject class is %p", [NSObject class]);
+    NSLog(@"NSObject is Meta Class %d, super is %d", class_isMetaClass([NSObject class]), class_isMetaClass(class_getSuperclass(class_getSuperclass([NSObject class]))));
+    NSLog(@"NSObject isa %p", objc_getClass((__bridge void *)[NSObject class]));
+    NSLog(@"NSObject Super class isa %p", class_getSuperclass([NSObject class]));
+    NSLog(@"Dog isa %p", objc_getClass((__bridge void *)[Dog class]));
+    NSLog(@"%ld", class_getInstanceSize([Dog class]));
+    NSLog(@"NSInteger size is %ld", sizeof(NSInteger));
+    */
+    MyClass *myClass = [[MyClass alloc] init];
+    unsigned int outCount = 0;
+    Class cls = myClass.class;
+    
+    //类名
+    NSLog(@"class name: %s", class_getName(cls));
+    NSLog(@"\r");
+    
+    NSLog(@"super class name: %s", class_getName(class_getSuperclass(cls)));
+    NSLog(@"\r");
+    
+    // 成员变量
+    Ivar *ivars = class_copyIvarList(cls, &outCount);
+    for (int i = 0; i < outCount; i++) {
+        Ivar ivar = ivars[i];
+        NSLog(@"instance variable's name: %s at index: %d", ivar_getName(ivar), i);
+    }
+    free(ivars);
+    Ivar string = class_getInstanceVariable(cls, "_string");
+    if (string != NULL) {
+        NSLog(@"_string name is %s", ivar_getName(string));
+    }
+    NSLog(@"\r");
+    
+    // 属性
+    objc_property_t *properties = class_copyPropertyList(cls, &outCount);
+    for (int i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        NSLog(@"property's name is %s", property_getName(property));
+    }
+    free(properties);
+    NSLog(@"\r");
+    
+    // 方法 成员方法放在自己的object_method_list，类方法放在meta class - Class isa的object_method_list
+    // objc_getMetaClass(class_getName(cls)) 获取meta class
+    // 这里返回的是指针 数组
+    Method *methods = class_copyMethodList(cls, &outCount);
+    for (int i = 0; i < outCount; i++) {
+        Method method = methods[i];
+        NSLog(@"method's signature: %s", sel_getName(method_getName(method)));
+    }
+    free(methods);
+    NSLog(@"\r");
+    
+    /**
+     /// An opaque type that represents a method in a class definition.
+     typedef struct objc_method *Method;
+
+     /// An opaque type that represents an instance variable.
+        指向objc_ivar结构体的指针
+     typedef struct objc_ivar *Ivar;
+
+     /// An opaque type that represents a category.
+     typedef struct objc_category *Category;
+
+     /// An opaque type that represents an Objective-C declared property.
+     typedef struct objc_property *objc_property_t;
+     */
+    
+    
+    int a = 10;
+    int *b = &a;
+    typedef int * B;
+    int **d = &b;
+    B *c = &b;
+    NSLog(@"d -->%d", *(*d));
+    NSLog(@"c -->%d", *(*c));
+}
+
+- (void)testMethodForward {
+    Car *car = [[Car alloc] init];
+    [car runToDestination:@"CDC"];
+}
 
 - (void)testBlock {
     NSString *nick = @"cc";
