@@ -15,6 +15,7 @@
 
 #import "AFRespModel.h"
 #import "Dog.h"
+#import "Dog+Wrestle.h"
 #import "BlockChainMaker.h"
 #import "Car.h"
 #import "MyClass.h"
@@ -50,7 +51,8 @@ static NSInteger totalMount = 1;
     MTRule *rule = [[MTRule alloc] initWithTarget:self selector:@selector(requestAF) durationThreshold:1];
     [rule apply];
     
-    [self testRuntime];
+    [self testAssociateObject];
+//    [self testRuntime];
 //    [self testMethodForward];
 //    [self testBlock];
 //    [self testShaddowAndDeepClone];
@@ -83,6 +85,13 @@ static NSInteger totalMount = 1;
 
 
 //MARK: - 处理
+
+- (void)testAssociateObject {
+    Dog *dog = [[Dog alloc] init];
+    dog.ownerName = @"Hon";
+    
+    NSLog(@"ownerName:%@,name:%@", dog.ownerName, dog.name);
+}
 
 - (void)testRuntime {
     /*
@@ -152,8 +161,7 @@ static NSInteger totalMount = 1;
      /// An opaque type that represents an Objective-C declared property.
      typedef struct objc_property *objc_property_t;
      */
-    
-    
+
     int a = 10;
     int *b = &a;
     typedef int * B;

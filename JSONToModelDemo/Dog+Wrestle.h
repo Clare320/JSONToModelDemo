@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Dog (Wrestle)
 
+@property (nonatomic, copy) NSString *ownerName;
+
 - (void)warry;
 
 @end
