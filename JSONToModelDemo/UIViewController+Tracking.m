@@ -12,7 +12,6 @@
 @implementation UIViewController (Tracking)
 
 + (void)load {
-    [super load];
     
     SEL originSel = @selector(viewWillAppear:);
     SEL newSel = @selector(llj_viewWillAppear:);
