@@ -50,19 +50,26 @@ static NSInteger totalMount = 1;
     
     MTRule *rule = [[MTRule alloc] initWithTarget:self selector:@selector(requestAF) durationThreshold:1];
     [rule apply];
-    
-    [self testAssociateObject];
+  
+//    [self testObjcProperty];
+//    [self testAssociateObject];
 //    [self testRuntime];
 //    [self testMethodForward];
 //    [self testBlock];
 //    [self testShaddowAndDeepClone];
 //    [self testMasonry];
-//    [self testYYModel];
+    [self testYYModel];
 //    [self testKVCAndKVO];
 
 }
 
 //MARK: - life cycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSLog(@"origin-viewWillAppear");
+}
 
 // 苹果推荐添加、更新约束的地方，
 - (void)updateViewConstraints {
@@ -93,6 +100,29 @@ static NSInteger totalMount = 1;
     NSLog(@"ownerName:%@,name:%@", dog.ownerName, dog.name);
 }
 
+- (void)testObjcProperty {
+    Dog *dog = [[Dog alloc] init];
+    Class cls = [dog class];
+    unsigned int count = 0;
+    objc_property_t *properties = class_copyPropertyList(cls, &count);
+    for (int i = 0; i < count; i++) {
+        objc_property_t property = properties[i];
+        // 属性 attributes 返回c字符串  T@"NSString",&,N,V_address  属性类型以及特性符  &表示Strong， D表示Dynamic
+        NSLog(@"dog property:%s, %s", property_getName(property), property_getAttributes(property));
+    }
+    free(properties);
+    /**
+     2020-09-25 09:55:03.083222+0800 JSONToModelDemo[2386:50166] view did load
+     2020-09-25 09:55:03.085980+0800 JSONToModelDemo[2386:50166] dog property:ownerName, T@"NSString",C,N
+     2020-09-25 09:55:03.086131+0800 JSONToModelDemo[2386:50166] dog property:address, T@"NSString",&,N,V_address
+     2020-09-25 09:55:03.086233+0800 JSONToModelDemo[2386:50166] dog property:name, T@"NSString",&,N,V_name
+     2020-09-25 09:55:03.086304+0800 JSONToModelDemo[2386:50166] dog property:age, Tq,N,V_age
+     2020-09-25 09:55:03.086388+0800 JSONToModelDemo[2386:50166] dog property:sex, Tq,D,N
+     2020-09-25 09:55:03.086461+0800 JSONToModelDemo[2386:50166] dog property:price, Tf,R,N,V_price
+     2020-09-25 09:55:03.092675+0800 JSONToModelDemo[2386:50166] update View Constraints!
+     */
+}
+
 - (void)testRuntime {
     /*
     NSLog(@"NSObject class is %p", [NSObject class]);
@@ -109,6 +139,7 @@ static NSInteger totalMount = 1;
     
     //类名
     NSLog(@"class name: %s", class_getName(cls));
+   
     NSLog(@"\r");
     
     NSLog(@"super class name: %s", class_getName(class_getSuperclass(cls)));
@@ -233,7 +264,7 @@ static NSInteger totalMount = 1;
 }
 
 - (void)testYYModel {
-    NSString *target = @"{\"address\":\"PuDong\", \"sex\":\"0\"}";
+    NSString *target = @"{\"address\":\"PuDong\", \"sex\":\"0\", \"ownername\":\"kli\"}";
     Dog *jsonDog = [Dog yy_modelWithJSON:target];
     NSLog(@"json--->%@", jsonDog);
     

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *_nickname;
 }
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSInteger age;
 @property (nonatomic) NSInteger sex;
 
@@ -23,3 +23,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

@@ -23,6 +23,7 @@
 		84CF7BA2251C871900F11A6F /* MyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF7BA1251C871900F11A6F /* MyClass.m */; };
 		84D4DAE125186CBB00636AF2 /* AFRespModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D4DAE025186CBB00636AF2 /* AFRespModel.m */; };
 		84D9374C251350500041BA7B /* YYModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D9374B251350500041BA7B /* YYModel.framework */; };
+		84F15B6B251DB23D0004522D /* UIViewController+Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F15B6A251DB23D0004522D /* UIViewController+Tracking.m */; };
 		C05D1E6BB55C4801E5F7EB9E /* Pods_JSONToModelDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F6E6E46502A6F86F0E17A8 /* Pods_JSONToModelDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,8 @@
 		84D4DADF25186CBB00636AF2 /* AFRespModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFRespModel.h; sourceTree = "<group>"; };
 		84D4DAE025186CBB00636AF2 /* AFRespModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFRespModel.m; sourceTree = "<group>"; };
 		84D9374B251350500041BA7B /* YYModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YYModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84F15B69251DB23D0004522D /* UIViewController+Tracking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Tracking.h"; sourceTree = "<group>"; };
+		84F15B6A251DB23D0004522D /* UIViewController+Tracking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Tracking.m"; sourceTree = "<group>"; };
 		D2F6E6E46502A6F86F0E17A8 /* Pods_JSONToModelDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONToModelDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1269E60EAFD38CDF3770F3F /* Pods-JSONToModelDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONToModelDemo.release.xcconfig"; path = "Target Support Files/Pods-JSONToModelDemo/Pods-JSONToModelDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +114,8 @@
 				84A5C50125130B4200FD9F16 /* SceneDelegate.m */,
 				84A5C50325130B4200FD9F16 /* ViewController.h */,
 				84A5C50425130B4200FD9F16 /* ViewController.m */,
+				84F15B69251DB23D0004522D /* UIViewController+Tracking.h */,
+				84F15B6A251DB23D0004522D /* UIViewController+Tracking.m */,
 				84CF7BA0251C871900F11A6F /* MyClass.h */,
 				84CF7BA1251C871900F11A6F /* MyClass.m */,
 				84A5C51625130B7000FD9F16 /* Dog.h */,
@@ -266,6 +271,7 @@
 				84CF7B9E251C37F600F11A6F /* Person.m in Sources */,
 				84A5C4FF25130B4200FD9F16 /* AppDelegate.m in Sources */,
 				84B47439251B223D00FE803D /* BlockChainMaker.m in Sources */,
+				84F15B6B251DB23D0004522D /* UIViewController+Tracking.m in Sources */,
 				84A5C51825130B7000FD9F16 /* Dog.m in Sources */,
 				84D4DAE125186CBB00636AF2 /* AFRespModel.m in Sources */,
 				84CF7BA2251C871900F11A6F /* MyClass.m in Sources */,
